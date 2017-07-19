@@ -28,7 +28,7 @@ function generate(filename) {
     return askPassphrase(true).then(passphrase => {
         const keypair = keys.generateKeyPair();
         console.log('Public key:', keypair.publicKey);
-        return keys.writeKeyFile(filename, password, keypair.secretKey);
+        return keys.writeKeyFile(filename, passphrase, keypair.secretKey);
     });
 }
 
