@@ -1,0 +1,33 @@
+{
+  "name": "peerio-update-maker",
+  "version": "0.0.1",
+  "description": "Manifest file generator for peerio-updater",
+  "main": "index.js",
+  "bin": {
+    "peerio-update-maker": "./cmd.js"
+  },
+  "scripts": {
+    "test": "mocha --timeout 30000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PeerioTechnologies/peerio-update-maker.git"
+  },
+  "keywords": [
+    "updates",
+    "crypto"
+  ],
+  "author": "Technologies Peerio Inc.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/PeerioTechnologies/peerio-update-maker/issues"
+  },
+  "homepage": "https://github.com/PeerioTechnologies/peerio-update-maker#readme",
+  "dependencies": {
+    "@types/node": "8.0.14",
+    "commander": "2.11.0",
+    "getpass": "0.1.7",
+    "peerio-updater": "file:../peerio-updater",
+    "tweetnacl": "1.0.0"
+  }
+}
