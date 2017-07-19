@@ -25,7 +25,7 @@ const nacl = require('tweetnacl');
 const { generateKeyPair } = require('peerio-updater/signing');
 const deriveKey = require('./bcrypt_pbkdf2');
 
-const DEFAULT_ROUNDS = 100;
+const DEFAULT_ROUNDS = 42;
 
 
 function deserialize(secretKey) {
