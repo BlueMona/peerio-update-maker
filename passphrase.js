@@ -16,7 +16,7 @@ function askPassphrase(confirm) {
                 getpass({prompt: 'Confirm'}, (err, confirmed) => {
                     if (err) return reject(err);
                     if (confirmed !== passphrase)
-                        return reject('Passphrases do not match');
+                        return reject(new Error('Passphrases do not match'));
                     fulfill(Buffer.from(confirmed, 'utf8'));
                 });
             } else {
