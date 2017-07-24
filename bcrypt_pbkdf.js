@@ -1,4 +1,4 @@
-// A tweaked versio of
+// A tweaked version of
 // https://github.com/joyent/node-bcrypt-pbkdf/blob/master/index.js
 
 var crypto_hash_sha512 = require('tweetnacl').lowlevel.crypto_hash;
