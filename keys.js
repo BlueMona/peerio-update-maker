@@ -28,7 +28,6 @@ const deriveKey = require('./bcrypt_pbkdf');
 
 const DEFAULT_ROUNDS = 42;
 
-
 function deserialize(secretKey) {
     const k = Buffer.from(secretKey, 'base64');
 
