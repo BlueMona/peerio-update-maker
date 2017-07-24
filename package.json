@@ -24,10 +24,14 @@
   },
   "homepage": "https://github.com/PeerioTechnologies/peerio-update-maker#readme",
   "dependencies": {
-    "@types/node": "8.0.14",
     "commander": "2.11.0",
     "getpass": "0.1.7",
     "peerio-updater": "file:../peerio-updater",
     "tweetnacl": "1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "8.0.14",
+    "chai": "4.1.0",
+    "mocha": "3.4.2"
   }
 }
