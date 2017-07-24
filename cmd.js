@@ -36,5 +36,5 @@ function printPublic(filename) {
     return askPassphrase()
         .then(passphrase => keys.readKeyFile(filename, passphrase))
         .then(secretKey => keys.getPublicKey(secretKey))
-        .then(publicKey => console.log(publicKey));
+        .then(publicKey => console.log(`untrusted comment: Peerio Updater public key\n${publicKey}`));
 }
