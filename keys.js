@@ -21,6 +21,7 @@
  */
 
 const fs = require('fs');
+const crypto = require('crypto');
 const nacl = require('tweetnacl');
 const { generateKeyPair } = require('peerio-updater/signing');
 const deriveKey = require('./bcrypt_pbkdf');
@@ -58,7 +59,7 @@ function deserialize(secretKey) {
 
 function serialize(parts) {
     const binrounds = Buffer.alloc(4);
-    binrounds.writeUInt32BE(parts.rounds);
+    binrounds.writeUInt32BE(parts.rounds, 0);
     return Buffer.concat([
         parts.algo,
         parts.kdfalgo,
@@ -122,7 +123,7 @@ function lockKey(passphrase, secretKey) {
     }
 
     // Generate salt.
-    k.salt = nacl.randomBytes(16);
+    k.salt = crypto.randomBytes(16);
     k.rounds = DEFAULT_ROUNDS;
 
     // Derive mask key and encrypt key with it.
