@@ -1,9 +1,9 @@
 // @ts-check
 const fs = require('fs');
 const path = require('path');
-const Manifest = require('peerio-updater/manifest');
-const { calculateHash } = require('peerio-updater/hash');
-const { calculateSize } = require('peerio-updater/size');
+const Manifest = require('@peerio/updater/manifest');
+const { calculateHash } = require('@peerio/updater/hash');
+const { calculateSize } = require('@peerio/updater/size');
 const { readKeyFile } = require('./keys');
 const askPassphrase = require('./passphrase');
 
