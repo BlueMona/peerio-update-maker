@@ -5,9 +5,8 @@ to generate key pairs for [peerio-updater](https://github.com/PeerioTechnologies
 
 ## Installation
 
-*TODO: will be published on npm*
 
-    npm install -g github:PeerioTechnologies/peerio-update-maker
+    npm install -g @peerio/update-maker
 
 
 ## Generating key pair

@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const program = require('commander');
 const askPassphrase = require('./passphrase');
 const keys = require('./keys');

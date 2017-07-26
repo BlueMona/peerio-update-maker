@@ -1,7 +1,7 @@
 {
-  "name": "peerio-update-maker",
-  "version": "0.0.1",
-  "description": "Manifest file generator for peerio-updater",
+  "name": "@peerio/update-maker",
+  "version": "0.0.2",
+  "description": "Manifest file generator for Peerio updater",
   "main": "index.js",
   "bin": {
     "peerio-update-maker": "./cmd.js"
@@ -26,7 +26,7 @@
   "dependencies": {
     "commander": "2.11.0",
     "getpass": "0.1.7",
-    "peerio-updater": "git+https://github.com/PeerioTechnologies/peerio-updater.git",
+    "@peerio/updater": "0.0.2",
     "tweetnacl": "1.0.0"
   },
   "devDependencies": {
