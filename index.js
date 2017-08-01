@@ -14,6 +14,7 @@ class ManifestMaker {
         this.manifest.version = version;
         this.manifest.date = new Date();
         this.manifest.isMandatory = isMandatory;
+        this.secretKey = null;
     }
 
     addFile(platform, path, url) {
@@ -49,22 +50,27 @@ class ManifestMaker {
         }));
     }
 
-    generate(secretKey) {
+    unlockKeyFile(passphrase, filename) {
+        return Promise.resolve(passphrase || process.env.UPDATER_PASSPHRASE)
+            .then(passphrase => passphrase || askPassphrase())
+            .then(passphrase => readKeyFile(filename, passphrase))
+            .then(secretKey => {
+                this.secretKey = secretKey;
+            });
+    }
+
+    generate() {
+        if (!this.secretKey) {
+            throw new Error('Calling generate() before unlockKeyFile()');
+        }
         return this._prepareFiles().then(files => {
             files.forEach(file => {
                 this.manifest.setFile(file.platform, file.url);
                 this.manifest.setSize(file.platform, file.size);
                 this.manifest.setSha512(file.platform, file.hash);
             });
-            return this.manifest.serialize(secretKey);
+            return this.manifest.serialize(this.secretKey);
         });
-    }
-
-    generateWithKeyFile(keyFilename, passphrase) {
-        return Promise.resolve(passphrase || process.env.UPDATER_PASSPHRASE)
-            .then(passphrase => passphrase || askPassphrase())
-            .then(passphrase => readKeyFile(keyFilename, passphrase))
-            .then(secretKey => this.generate(secretKey));
     }
 }
 
