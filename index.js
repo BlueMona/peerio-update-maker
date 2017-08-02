@@ -50,7 +50,7 @@ class ManifestMaker {
         }));
     }
 
-    unlockKeyFile(passphrase, filename) {
+    unlockKeyFile(filename, passphrase) {
         return Promise.resolve(passphrase || process.env.UPDATER_PASSPHRASE)
             .then(passphrase => passphrase || askPassphrase())
             .then(passphrase => readKeyFile(filename, passphrase))
