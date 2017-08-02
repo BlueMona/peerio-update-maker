@@ -1,6 +1,6 @@
 {
   "name": "@peerio/update-maker",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Manifest file generator for Peerio updater",
   "main": "index.js",
   "bin": {
