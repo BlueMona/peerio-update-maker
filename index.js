@@ -8,13 +8,25 @@ const { readKeyFile } = require('./keys');
 const askPassphrase = require('./passphrase');
 
 class ManifestMaker {
-    constructor(version, isMandatory) {
+    constructor() {
         this.files = [];
         this.manifest = new Manifest();
-        this.manifest.version = version;
-        this.manifest.date = new Date();
-        this.manifest.isMandatory = isMandatory;
         this.secretKey = null;
+    }
+
+    unlockKeyFile(keyFileName, passphrase) {
+        return Promise.resolve(passphrase || process.env.UPDATER_PASSPHRASE)
+            .then(passphrase => passphrase || askPassphrase())
+            .then(passphrase => readKeyFile(keyFileName, passphrase))
+            .then(secretKey => {
+                this.secretKey = secretKey;
+            });
+    }
+
+    setVersion(version, isMandatory) {
+        this.manifest.version = version;
+        this.manifest.isMandatory = isMandatory;
+        this.manifest.date = new Date();
     }
 
     addFile(platform, path, url) {
@@ -29,6 +41,9 @@ class ManifestMaker {
      * @param {string} repo GitHub repository name in 'username/project' format
      */
     addGitHubFile(platform, filepath, repo) {
+        if (!this.manifest.version) {
+            throw new Error('Calling addGitHubFile() before setVersion()');
+        }
         const version = this.manifest.version;
         const filename = path.basename(filepath); // TODO: must be 'safe filename' for URL?
         this.addFile(
@@ -48,15 +63,6 @@ class ManifestMaker {
                 return file;
             });
         }));
-    }
-
-    unlockKeyFile(filename, passphrase) {
-        return Promise.resolve(passphrase || process.env.UPDATER_PASSPHRASE)
-            .then(passphrase => passphrase || askPassphrase())
-            .then(passphrase => readKeyFile(filename, passphrase))
-            .then(secretKey => {
-                this.secretKey = secretKey;
-            });
     }
 
     generate() {
