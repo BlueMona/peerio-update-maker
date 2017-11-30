@@ -16,7 +16,7 @@ class ManifestMaker {
 
     unlockKeyFile(keyFileName, passphrase) {
         return Promise.resolve(passphrase || process.env.UPDATER_PASSPHRASE)
-            .then(passphrase => passphrase || askPassphrase())
+            .then(passphrase => passphrase ? Buffer.from(passphrase, 'utf8') : askPassphrase())
             .then(passphrase => readKeyFile(keyFileName, passphrase))
             .then(secretKey => {
                 this.secretKey = secretKey;
