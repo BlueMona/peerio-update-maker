@@ -23,10 +23,14 @@ class ManifestMaker {
             });
     }
 
-    setVersion(version, isMandatory) {
+    setVersion(version) {
         this.manifest.version = version;
-        this.manifest.isMandatory = isMandatory;
+        this.manifest.makeMandatory(); // can be changed with setOptionalSince.
         this.manifest.date = new Date();
+    }
+
+    setOptionalSince(lastMandatoryVersion) {
+        this.manifest.optionalSince = lastMandatoryVersion;
     }
 
     addFile(platform, path, url) {
